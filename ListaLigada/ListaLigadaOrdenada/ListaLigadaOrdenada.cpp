@@ -129,25 +129,98 @@ void inserirElemento()
 	{
 		primeiro = novo;
 	}
-	else
-	{
-		// procura o final da lista
-		NO* aux = primeiro;
-		while (aux->prox != NULL) {
-			aux = aux->prox;
-		}
-		aux->prox = novo;
-	}
+	if (primeiro == NULL)
+    {
+        cout << "Lista vazia \n";
+        return;
+    }
+
+    int valor;
+    cout << "Digite o valor a ser buscado: ";
+    cin >> valor;
+
+    NO* aux = primeiro;
+
+    while (aux != NULL && aux->valor <= valor)
+    {
+        if (aux->valor == valor)
+        {
+            cout << "Elemento encontrado: " << aux->valor << endl;
+            return;
+        }
+        aux = aux->prox;
+    }
+
+    cout << "Elemento não encontrado\n";
 }
 
 void excluirElemento()
 {
+	if (primeiro == NULL)
+	{
+		cout << "Lista vazia \n";
+		return;
+	}
 
+	int valor;
+	cout << "Digite o valor a ser excluído: ";
+	cin >> valor;
+
+	NO* atual = primeiro;
+	NO* anterior = NULL;
+
+	while (atual != NULL && atual->valor < valor)
+	{
+		anterior = atual;
+		atual = atual->prox;
+	}
+
+	// Se o elemento não foi encontrado
+	if (atual == NULL || atual->valor != valor)
+	{
+		cout << "Elemento não encontrado\n";
+		return;
+	}
+
+	// Se o elemento a ser removido é o primeiro
+	if (anterior == NULL)
+	{
+		primeiro = atual->prox;
+	}
+	else
+	{
+		anterior->prox = atual->prox;
+	}
+
+	free(atual);
+	cout << "Elemento excluído\n";
 }
 
 void buscarElemento()
 {
+	if (primeiro == NULL)
+	{
+		cout << "Lista vazia \n";
+		return;
+	}
 
+	int valor;
+	cout << "Digite o valor a ser buscado: ";
+	cin >> valor;
+
+	NO* aux = primeiro;
+
+	while (aux != NULL && aux->valor <= valor)
+	{
+		if (aux->valor == valor)
+		{
+			cout << "Elemento encontrado: " << aux->valor << endl;
+			return;
+		}
+		aux = aux->prox;
+	}
+
+	cout << "Elemento não encontrado\n";
 }
 
 
